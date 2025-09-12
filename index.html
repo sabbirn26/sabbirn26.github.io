@@ -39,11 +39,11 @@
     .header-content { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
     .logo { font-weight: 700; font-size: 20px; color: var(--text); }
     .logo span { color: var(--accent); }
-    nav { display: flex; gap: 32px; }
+    nav { display: flex; gap: 32px; align-items: center; }
     nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color .2s ease; }
     nav a:hover { color: var(--text); }
 
-    /* Hero Section (Image left, text right) */
+    /* Hero */
     .hero { padding: 80px 0; display: grid; grid-template-columns: 400px 1fr; gap: 60px; align-items: center; }
     .hero-content h1 { font-size: 48px; font-weight: 700; line-height: 1.1; margin-bottom: 20px; }
     .hero-content .subtitle { font-size: 20px; color: var(--text-muted); margin-bottom: 16px; }
@@ -55,7 +55,7 @@
     .btn-secondary { background: var(--surface-elevated); color: var(--text); border: 1px solid var(--border); }
     .btn-secondary:hover { border-color: var(--border-hover); transform: translateY(-1px); }
 
-    /* Profile photo (replaces app mockup) */
+    /* Profile photo */
     .profile-photo { display:flex; justify-content:center; align-items:center; }
     .profile-photo img { width: 320px; height: 320px; object-fit: cover; border-radius: 24px; border:1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,.35); }
 
@@ -69,9 +69,8 @@
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; }
     .project-card { background: var(--surface); border:1px solid var(--border); border-radius:20px; overflow:hidden; transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; text-decoration:none; color:inherit; }
     .project-card:hover { transform: translateY(-4px); border-color: var(--border-hover); box-shadow:0 20px 40px rgba(0,0,0,.2); }
-    .project-image { width:100%; height:200px; background: linear-gradient(135deg, var(--accent), #6366f1); position:relative; overflow:hidden; }
-    .project-image::after { content:''; position:absolute; inset:0; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,.1) 50%, transparent 70%); animation: shimmer 2s infinite; }
-    @keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
+    .project-thumb { width: 100%; height: 200px; object-fit: cover; display: block; background: #0b0d12; border-bottom: 1px solid var(--border); }
+
     .project-content { padding:24px; }
     .project-content h3 { font-size:20px; font-weight:600; margin-bottom:12px; }
     .project-content p { color: var(--text-muted); }
@@ -137,6 +136,8 @@
           <a href="#skills">Skills</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
+          <!-- NEW: CV link (update the href to your actual path/filename if different) -->
+          <a href="assets/cv.pdf" target="_blank" rel="noopener">CV</a>
         </nav>
       </div>
     </div>
@@ -154,8 +155,8 @@
           <p>Passionate iOS developer with 2+ years of fintech experience. Specializing in Swift, SwiftUI, and secure mobile applications that users love.</p>
           <div class="cta">
             <a class="btn btn-primary" href="#projects">View Projects</a>
-            <a class="btn btn-secondary" href="https://github.com/sabbirn26" target="_blank">GitHub ↗</a>
-            <a class="btn btn-secondary" href="https://linkedin.com/in/sabbirn26" target="_blank">LinkedIn ↗</a>
+            <a class="btn btn-secondary" href="https://github.com/sabbirn26" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="btn btn-secondary" href="https://linkedin.com/in/sabbirn26" target="_blank" rel="noopener">LinkedIn ↗</a>
           </div>
         </div>
       </section>
@@ -165,30 +166,35 @@
           <h2>Featured Projects</h2>
           <p>A collection of applications I've built and contributed to</p>
         </div>
+
         <div class="projects-grid">
-          <a class="project-card fade-in" href="https://apps.apple.com/in/app/zicharge/id1611304451" target="_blank">
-            <div class="project-image"></div>
+          <a class="project-card fade-in" href="https://apps.apple.com/in/app/zicharge/id1611304451" target="_blank" rel="noopener">
+            <!-- Image for project (falls back to text poster if missing) -->
+            <img class="project-thumb" src="assets/projects/zicharge.jpg" alt="ZiCharge – MFS App cover image" loading="lazy">
             <div class="project-content">
               <h3>ZiCharge – MFS App</h3>
               <p>Mobile financial services application with secure authentication, multi-payment integration, and real-time notifications.</p>
             </div>
           </a>
-          <a class="project-card fade-in" href="https://apps.apple.com/in/app/fastpay-wallet/id1255784969" target="_blank">
-            <div class="project-image"></div>
+
+          <a class="project-card fade-in" href="https://apps.apple.com/in/app/fastpay-wallet/id1255784969" target="_blank" rel="noopener">
+            <img class="project-thumb" src="assets/projects/fastpay-wallet.jpg" alt="FastPay Wallet cover image" loading="lazy">
             <div class="project-content">
               <h3>FastPay Wallet</h3>
               <p>Comprehensive digital wallet for Iraq featuring eKYC verification, biometric authentication, and seamless transactions.</p>
             </div>
           </a>
-          <a class="project-card fade-in" href="https://www.newroztech.com/product/crypto-wallet" target="_blank">
-            <div class="project-image"></div>
+
+          <a class="project-card fade-in" href="https://www.newroztech.com/product/crypto-wallet" target="_blank" rel="noopener">
+            <img class="project-thumb" src="assets/projects/iqdx-crypto.jpg" alt="iQDX Crypto Trading cover image" loading="lazy">
             <div class="project-content">
               <h3>iQDX Crypto Trading</h3>
               <p>Modern SwiftUI crypto trading application with live market data, portfolio management, and secure eKYC verification.</p>
             </div>
           </a>
-          <a class="project-card fade-in" href="https://www.npmjs.com/package/fastpay-react-package" target="_blank">
-            <div class="project-image"></div>
+
+          <a class="project-card fade-in" href="https://www.npmjs.com/package/fastpay-react-package" target="_blank" rel="noopener">
+            <img class="project-thumb" src="assets/projects/fastpay-react-sdk.jpg" alt="FastPay React Native SDK cover image" loading="lazy">
             <div class="project-content">
               <h3>FastPay React Native SDK</h3>
               <p>React Native package for payment integration with deep linking support and comprehensive callback handling.</p>
@@ -259,9 +265,8 @@
           </div>
           <div class="contact-item">
             <h4>LinkedIn</h4>
-            <a href="https://linkedin.com/in/sabbirn26" target="_blank">linkedin.com/in/sabbirn26</a>
+            <a href="https://linkedin.com/in/sabbirn26" target="_blank" rel="noopener">linkedin.com/in/sabbirn26</a>
           </div>
-          
         </div>
       </section>
     </div>
@@ -291,6 +296,37 @@
       entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.animationPlayState = 'running'; } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => { el.style.animationPlayState = 'paused'; observer.observe(el); });
+
+    // ---------- Project image fallback: auto-generate a text poster from project name ----------
+    function escapeXml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+    }
+    document.querySelectorAll('.project-card').forEach(card => {
+      const img = card.querySelector('img.project-thumb');
+      const title = card.querySelector('.project-content h3')?.textContent?.trim() || 'Project';
+      if (!img) return;
+
+      // If the real image fails to load, replace it with a nice SVG thumbnail using the project title
+      img.addEventListener('error', () => {
+        const safeTitle = escapeXml(title);
+        const svg = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#3b82f6"/>
+                <stop offset="1" stop-color="#6366f1"/>
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="#111318"/>
+            <rect width="100%" height="100%" fill="url(#g)" opacity="0.25"/>
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                  fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="700">
+              ${safeTitle}
+            </text>
+          </svg>`;
+        img.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+      });
+    });
   </script>
 </body>
 </html>
