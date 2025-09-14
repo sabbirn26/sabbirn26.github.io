@@ -83,13 +83,43 @@
     .skill-item:hover { border-color: var(--accent); background: var(--surface); }
 
     /* Experience */
-    .experience-card { background: var(--surface); border:1px solid var(--border); border-radius:20px; padding:32px; margin-bottom:24px; }
+    .experience-card { background: var(--surface); border:1px solid var(--border); border-radius:20px; padding:32px; margin-bottom:24px; position: relative; margin-left: 40px; }
+    .experience-card::before {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      z-index: 1;
+    }
+    .experience-card::after {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 20px;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+      z-index: 2;
+    }
+    .experience-card:last-child::before {
+      bottom: calc(100% - 40px);
+    }
     .experience-card h3 { font-size:22px; font-weight:600; margin-bottom:8px; }
-    .experience-card .company { color: var(--accent); font-weight:500; margin-bottom:16px; }
-    .experience-card .date { color: var(--text-dim); font-size:14px; margin-bottom:20px; }
-    .experience-card ul { list-style:none; padding-left:0; }
-    .experience-card li { color: var(--text-muted); margin-bottom:8px; padding-left:20px; position:relative; }
-    .experience-card li:before { content:'→'; color: var(--accent); font-weight:bold; position:absolute; left:0; }
+    .experience-card .company { color: var(--accent); font-weight:500; margin-bottom:8px; }
+    .experience-card .date { color: var(--text-dim); font-size:14px; margin-bottom:8px; }
+    .experience-card .location { color: var(--text-dim); font-size:14px; margin-bottom:16px; }
+    .experience-card p { color: var(--text-muted); margin-bottom:16px; line-height:1.6; }
+    .experience-card h4 { font-size:16px; font-weight:600; margin:20px 0 12px 0; color: var(--text); }
+    .experience-card ul { list-style:none; padding-left:0; margin-bottom:16px; }
+    .experience-card li { color: var(--text-muted); margin-bottom:8px; padding-left:20px; position:relative; line-height:1.5; }
+    .experience-card li:before { content:'•'; color: var(--accent); font-weight:bold; position:absolute; left:0; }
+    .experience-card ul ul { margin-top:8px; margin-bottom:0; }
+    .experience-card ul ul li { font-size:14px; }
+    .experience-card strong { color: var(--text); font-weight:600; }
 
     /* Contact */
     .contact-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:24px; }
@@ -170,9 +200,9 @@
         <div class="projects-grid">
           <a class="project-card fade-in" href="https://apps.apple.com/in/app/zicharge/id1611304451" target="_blank" rel="noopener">
             <!-- Image for project (falls back to text poster if missing) -->
-            <img class="project-thumb" src="assets/projects/zicharge.jpg" alt="ZiCharge – MFS App cover image" loading="lazy">
+            <img class="project-thumb" src="assets/projects/zicharge.jpg" alt="ZiCharge — MFS App cover image" loading="lazy">
             <div class="project-content">
-              <h3>ZiCharge – MFS App</h3>
+              <h3>ZiCharge — MFS App</h3>
               <p>Mobile financial services application with secure authentication, multi-payment integration, and real-time notifications.</p>
             </div>
           </a>
@@ -235,16 +265,56 @@
           <h2>Experience</h2>
           <p>My professional journey in mobile development</p>
         </div>
+        
         <div class="experience-card">
-          <h3>Software Engineer</h3>
+          <h3>Junior Software Engineer (iOS)</h3>
           <div class="company">Newroz Technologies Limited</div>
-          <div class="date">February 2023 – Present</div>
+          <div class="date">March 2023 — Present · 2 years 7 months</div>
+          <div class="location">Dhaka, Bangladesh · On-site</div>
+          <p>As a Junior Software Engineer (iOS) at Newroz Technologies Limited, I specialize in designing, developing, and maintaining high-quality mobile applications using Swift, SwiftUI, UIKit, and Xcode.</p>
+          
+          <h4>Key Projects & Contributions:</h4>
           <ul>
-            <li>Developed and maintained iOS applications using Swift, SwiftUI, and UIKit</li>
-            <li>Integrated biometric authentication (FaceID, TouchID) and OTP verification systems</li>
-            <li>Built comprehensive eKYC solutions and payment system integrations</li>
-            <li>Implemented push notifications and offline data storage with Core Data</li>
-            <li>Successfully published multiple applications to the App Store</li>
+            <li><strong>IQDX</strong> – Cryptocurrency trading application with feature development and performance improvements</li>
+            <li><strong>ZiCharge</strong> – Enhanced UI/UX and implemented robust functionalities including:
+              <ul style="margin-left: 20px; margin-top: 8px;">
+                <li>Game Card Buying & Delete Account functionality</li>
+                <li>Device Change Verification & Crypto Buying</li>
+                <li>iOS Face ID & Biometric Authentication</li>
+                <li>PIN & Password Change with Google reCAPTCHA</li>
+                <li>App Store release and debugging</li>
+              </ul>
+            </li>
+            <li><strong>FastPay</strong> – Seamless payment integration and eKYC UI design using UIKit</li>
+            <li>Expertise in MVVM, VIPER, and MVC architectural patterns</li>
+            <li>Performance optimization, debugging, and App Store deployment</li>
+          </ul>
+        </div>
+
+        <div class="experience-card">
+          <h3>Software Engineer in Test</h3>
+          <div class="company">Newroz Technologies Limited</div>
+          <div class="date">December 2022 — February 2023 · 3 months</div>
+          <p>During my probation period, I started working on real-world projects and expanded my technical expertise.</p>
+          <ul>
+            <li>Contributed to IQDX cryptocurrency trading application development</li>
+            <li>Worked on ZiCharge application improvements</li>
+            <li>Learned UIKit and Storyboard basics for dynamic UI components</li>
+            <li>Gained practical experience in project development and team collaboration</li>
+          </ul>
+        </div>
+
+        <div class="experience-card">
+          <h3>Software Engineer Internship</h3>
+          <div class="company">Newroz Technologies Limited</div>
+          <div class="date">August 2022 — November 2022 · 4 months</div>
+          <p>Gained practical knowledge in iOS development fundamentals and industry best practices.</p>
+          <ul>
+            <li>Swift & SwiftUI Development – Writing clean and efficient code</li>
+            <li>Architectural Patterns – Learning MVC, MVVM, and VIPER in real projects</li>
+            <li>Debugging & Performance Optimization best practices</li>
+            <li>Experience with Core Data, RESTful APIs, and Git version control</li>
+            <li>UI/UX Design Principles application</li>
           </ul>
         </div>
       </section>
