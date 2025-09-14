@@ -349,6 +349,39 @@
   </footer>
 
   <script>
+    // Dynamic time calculation for current position
+    function updateCurrentPositionDuration() {
+      const startDate = new Date('2023-03-01'); // March 2023
+      const currentDate = new Date();
+      
+      const totalMonths = (currentDate.getFullYear() - startDate.getFullYear()) * 12 + 
+                         (currentDate.getMonth() - startDate.getMonth());
+      
+      const years = Math.floor(totalMonths / 12);
+      const months = totalMonths % 12;
+      
+      let duration = '';
+      if (years > 0) {
+        duration += `${years} year${years > 1 ? 's' : ''}`;
+        if (months > 0) {
+          duration += ` ${months} month${months > 1 ? 's' : ''}`;
+        }
+      } else {
+        duration = `${months} month${months > 1 ? 's' : ''}`;
+      }
+      
+      const dateElement = document.getElementById('current-position-date');
+      if (dateElement) {
+        dateElement.textContent = `March 2023 — Present · ${duration}`;
+      }
+    }
+    
+    // Update duration when page loads
+    updateCurrentPositionDuration();
+    
+    // Update duration every day (optional - updates when user visits)
+    setInterval(updateCurrentPositionDuration, 24 * 60 * 60 * 1000);
+
     // Smooth scrolling for in-page links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
