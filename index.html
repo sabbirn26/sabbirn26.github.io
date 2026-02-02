@@ -7,7 +7,9 @@
   <title>Sabbir Nasir — iOS Developer</title>
   <meta name="description"
     content="Portfolio of Nasir Uddin Sabbir — iOS & Fintech Developer (Swift, SwiftUI, UIKit, React Native)">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@700&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --bg: #030407;
@@ -187,15 +189,40 @@
     }
 
     .hero-content h1 {
-      font-size: 64px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 52px;
       font-weight: 800;
-      line-height: 1.05;
+      line-height: 1.2;
       margin-bottom: 24px;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
       background: linear-gradient(135deg, var(--text) 30%, var(--accent) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      display: inline-block;
+      border-right: 3px solid var(--accent);
+      white-space: pre-wrap;
+      min-height: 1.2em;
+    }
+
+    .hero-content h1.typing-finished {
+      border-right: none;
+    }
+
+    @keyframes blink-cursor {
+
+      from,
+      to {
+        border-color: transparent
+      }
+
+      50% {
+        border-color: var(--accent)
+      }
+    }
+
+    .hero-content h1:not(.typing-finished) {
+      animation: blink-cursor 0.75s step-end infinite;
     }
 
     .hero-content .subtitle {
@@ -865,7 +892,7 @@
           <img src="assets/profile.png" alt="Sabbir Nasir profile photo" />
         </div>
         <div class="hero-content">
-          <h1>iOS Developer<br>Building the Future</h1>
+          <h1 id="hero-title"></h1>
           <p class="subtitle">Crafting exceptional mobile experiences</p>
           <p>Passionate iOS developer with 3+ years of fintech experience. Specializing in Swift, SwiftUI, and secure
             mobile applications that users love.</p>
@@ -1279,6 +1306,29 @@
         navMenu.classList.remove('active');
       }
     });
+
+    // Typewriter Animation
+    const heroTitle = document.getElementById('hero-title');
+    const textToType = "iOS Developer\nBuilding the Future";
+    let charIndex = 0;
+
+    function typeHeroHeadline() {
+      if (charIndex < textToType.length) {
+        const char = textToType.charAt(charIndex);
+        if (char === '\n') {
+          heroTitle.innerHTML += '<br>';
+        } else {
+          heroTitle.innerHTML += char;
+        }
+        charIndex++;
+        setTimeout(typeHeroHeadline, 100); // 100ms per char
+      } else {
+        heroTitle.classList.add('typing-finished');
+      }
+    }
+
+    // Start typing after a short delay
+    setTimeout(typeHeroHeadline, 500);
 
   </script>
 </body>
