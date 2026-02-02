@@ -509,6 +509,11 @@
       text-align: center;
     }
 
+    .close-menu-btn {
+      display: none;
+      /* Hidden on desktop */
+    }
+
     @media (max-width: 1024px) {
       .hero {
         grid-template-columns: 1fr;
@@ -570,6 +575,8 @@
       }
 
       .close-menu-btn {
+        display: flex;
+        /* Show on mobile */
         position: absolute;
         top: 24px;
         right: 24px;
