@@ -200,9 +200,7 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
       color: var(--accent);
-      /* Fallback for browsers that don't support clipping */
       display: inline-block;
-      /* Fix for rendering blocks instead of clipped text */
       text-align: left;
       white-space: pre-wrap;
       position: relative;
@@ -671,6 +669,10 @@
       .hero {
         grid-template-columns: 1fr;
         gap: 40px;
+        text-align: center;
+      }
+
+      .hero-content h1 {
         text-align: center;
       }
     }
