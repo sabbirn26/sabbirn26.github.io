@@ -698,9 +698,26 @@
         </div>
 
         <div class="experience-card">
+          <h3>Software Engineer</h3>
+          <div class="company">Newroz Technologies Limited</div>
+          <div class="date" id="current-position-date">January 2026 — Present · 2 months</div>
+          <div class="location">Dhaka, Bangladesh · On-site</div>
+          <p>Promoted to Software Engineer, continuing to drive excellence in mobile application development with a
+            focus on advanced architectural patterns and system scalability.</p>
+
+          <h4>Key Responsibilities:</h4>
+          <ul>
+            <li>Leading iOS development initiatives for key fintech products</li>
+            <li>Mentoring junior developers and conducting code reviews</li>
+            <li>Architecting scalable solutions using Clean Architecture and SwiftUI</li>
+            <li>Optimizing CI/CD pipelines for faster deployment cycles</li>
+          </ul>
+        </div>
+
+        <div class="experience-card">
           <h3>Junior Software Engineer (iOS)</h3>
           <div class="company">Newroz Technologies Limited</div>
-          <div class="date" id="current-position-date">March 2023 — Present · 2 years 7 months</div>
+          <div class="date">March 2023 — December 2025 · 2 years 10 months</div>
           <div class="location">Dhaka, Bangladesh · On-site</div>
           <p>As a Junior Software Engineer (iOS) at Newroz Technologies Limited, I specialize in designing, developing,
             and maintaining high-quality mobile applications using Swift, SwiftUI, UIKit, and Xcode.</p>
@@ -785,7 +802,7 @@
   <script>
     // Dynamic time calculation for current position
     function updateCurrentPositionDuration() {
-      const startDate = new Date('2023-03-01'); // March 2023
+      const startDate = new Date('2026-01-01'); // January 2026
       const currentDate = new Date();
 
       const totalMonths = (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
@@ -806,7 +823,7 @@
 
       const dateElement = document.getElementById('current-position-date');
       if (dateElement) {
-        dateElement.textContent = `March 2023 — Present · ${duration}`;
+        dateElement.textContent = `January 2026 — Present · ${duration}`;
       }
     }
 
