@@ -62,7 +62,7 @@
     .header-content {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      /* removed justify-content: space-between */
       padding: 16px 0;
     }
 
@@ -70,6 +70,8 @@
       font-weight: 700;
       font-size: 20px;
       color: var(--text);
+      flex: 1;
+      /* Left section grows */
     }
 
     .logo span {
@@ -77,9 +79,18 @@
     }
 
     nav {
+      /* Center section */
       display: flex;
       gap: 32px;
       align-items: center;
+      justify-content: center;
+    }
+
+    .header-right {
+      flex: 1;
+      /* Right section grows */
+      display: flex;
+      justify-content: flex-end;
     }
 
     nav a {
@@ -539,10 +550,12 @@
           <a href="#skills">Skills</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
+        </nav>
+        <div class="header-right">
           <!-- NEW: CV link (update the href to your actual path/filename if different) -->
           <a href="assets/cv.pdf" target="_blank" rel="noopener" class="btn btn-primary"
             style="padding: 8px 16px; font-size: 14px;">Resume</a>
-        </nav>
+        </div>
       </div>
     </div>
   </header>
