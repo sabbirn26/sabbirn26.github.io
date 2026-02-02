@@ -23,6 +23,43 @@
       --border-hover: #374151;
     }
 
+    /* Light Theme Overrides */
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --surface: #f3f4f6;
+      --surface-elevated: #ffffff;
+      --text: #111827;
+      --text-muted: #4b5563;
+      --text-dim: #6b7280;
+      /* Keep standard accent or adjust if needed */
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --border: #e5e7eb;
+      --border-hover: #d1d5db;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-right: 16px;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -546,12 +583,32 @@
         <div class="logo">Sabbir<span>Nasir</span></div>
         <nav>
           <a href="#projects">Projects</a>
-          <a href="#personal-projects">Personal Projects</a>
           <a href="#skills">Skills</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
         </nav>
         <div class="header-right">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+            <!-- Sun Icon (for Dark Mode -> show Sun to switch to Light) / default starts as Dark -->
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <!-- Moon Icon (hidden by default in script) -->
+            <svg class="moon-icon" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
           <!-- NEW: CV link (update the href to your actual path/filename if different) -->
           <a href="assets/cv.pdf" target="_blank" rel="noopener" class="btn btn-primary"
             style="padding: 8px 16px; font-size: 14px;">Resume</a>
@@ -916,6 +973,34 @@
         img.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
       });
     });
+    // Theme Toggle Logic
+    const toggleBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+
+    // Check local storage or system preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      sunIcon.style.display = 'none';
+      moonIcon.style.display = 'block';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      let theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    });
+
   </script>
 </body>
 
