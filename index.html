@@ -199,30 +199,30 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      display: inline-block;
-      border-right: 3px solid var(--accent);
+      display: inline;
       white-space: pre-wrap;
-      min-height: 1.2em;
     }
 
-    .hero-content h1.typing-finished {
-      border-right: none;
+    .typing-cursor {
+      display: inline-block;
+      width: 4px;
+      height: 0.8em;
+      background-color: var(--accent);
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: blink-cursor 0.75s step-end infinite;
     }
 
     @keyframes blink-cursor {
 
       from,
       to {
-        border-color: transparent
+        opacity: 1
       }
 
       50% {
-        border-color: var(--accent)
+        opacity: 0
       }
-    }
-
-    .hero-content h1:not(.typing-finished) {
-      animation: blink-cursor 0.75s step-end infinite;
     }
 
     .hero-content .subtitle {
@@ -1311,19 +1311,19 @@
     const heroTitle = document.getElementById('hero-title');
     const textToType = "iOS Developer\nBuilding the Future";
     let charIndex = 0;
+    let currentHtml = "";
 
     function typeHeroHeadline() {
       if (charIndex < textToType.length) {
         const char = textToType.charAt(charIndex);
         if (char === '\n') {
-          heroTitle.innerHTML += '<br>';
+          currentHtml += '<br>';
         } else {
-          heroTitle.innerHTML += char;
+          currentHtml += char;
         }
+        heroTitle.innerHTML = currentHtml + '<span class="typing-cursor"></span>';
         charIndex++;
-        setTimeout(typeHeroHeadline, 100); // 100ms per char
-      } else {
-        heroTitle.classList.add('typing-finished');
+        setTimeout(typeHeroHeadline, 100);
       }
     }
 
