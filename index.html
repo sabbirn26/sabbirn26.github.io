@@ -487,6 +487,28 @@
     }
 
     /* Responsive */
+    /* Mobile Menu Styles */
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      margin-left: 16px;
+    }
+
+    .nav-resume-mobile {
+      display: none;
+      /* Hidden by default on desktop */
+      margin-top: 16px;
+      color: var(--accent) !important;
+      font-weight: 600;
+      border: 1px solid var(--accent);
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
     @media (max-width: 1024px) {
       .hero {
         grid-template-columns: 1fr;
@@ -496,6 +518,49 @@
     }
 
     @media (max-width: 768px) {
+      .menu-btn {
+        display: block;
+      }
+
+      .desktop-resume {
+        display: none;
+      }
+
+      .nav-resume-mobile {
+        display: inline-block;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 75%;
+        background: var(--surface);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 80px 32px 32px 32px;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        z-index: 1000;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+      }
+
+      nav.active {
+        transform: translateX(0);
+      }
+
+      nav a {
+        font-size: 18px;
+        padding: 12px 0;
+        width: 100%;
+        border-bottom: 1px solid var(--border);
+      }
+
+      nav a:last-child {
+        border-bottom: none;
+      }
+
       .container {
         padding: 0 16px;
       }
@@ -583,11 +648,13 @@
     <div class="container">
       <div class="header-content">
         <div class="logo">Sabbir<span>Nasir</span></div>
-        <nav>
+        <nav id="nav-menu">
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
+          <!-- Mobile Only Resume Link -->
+          <a href="assets/cv.pdf" target="_blank" rel="noopener" class="nav-resume-mobile">Resume</a>
         </nav>
         <div class="header-right">
           <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
@@ -611,9 +678,20 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </button>
-          <!-- NEW: CV link (update the href to your actual path/filename if different) -->
-          <a href="assets/cv.pdf" target="_blank" rel="noopener" class="btn btn-primary"
+
+          <!-- Desktop Resume Button -->
+          <a href="assets/cv.pdf" target="_blank" rel="noopener" class="btn btn-primary desktop-resume"
             style="padding: 8px 16px; font-size: 14px;">Resume</a>
+
+          <!-- Hamburger Menu Button -->
+          <button class="menu-btn" id="menu-toggle" aria-label="Toggle menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -1000,6 +1078,30 @@
         localStorage.setItem('theme', 'light');
         sunIcon.style.display = 'none';
         moonIcon.style.display = 'block';
+      }
+    });
+
+    // Mobile Menu Logic
+    const menuBtn = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    menuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('active') &&
+        !navMenu.contains(e.target) &&
+        !menuBtn.contains(e.target)) {
+        navMenu.classList.remove('active');
       }
     });
 
