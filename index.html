@@ -195,12 +195,17 @@
       line-height: 1.2;
       margin-bottom: 24px;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, var(--text) 30%, var(--accent) 100%);
+      background: linear-gradient(135deg, var(--text) 20%, var(--accent) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      display: inline;
+      color: var(--accent);
+      /* Fallback for browsers that don't support clipping */
+      display: inline-block;
+      /* Fix for rendering blocks instead of clipped text */
+      text-align: left;
       white-space: pre-wrap;
+      position: relative;
     }
 
     .typing-cursor {
