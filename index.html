@@ -440,30 +440,39 @@
     .experience-card::before {
       content: '';
       position: absolute;
-      left: -28px;
+      left: -32px;
       top: 0;
-      bottom: -32px;
+      bottom: -40px;
+      /* Overlap to ensure continuity */
       width: 2px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
+      background: linear-gradient(to bottom,
+          transparent,
+          var(--accent) 15%,
+          var(--accent) 85%,
+          transparent);
       z-index: 1;
+      opacity: 0.4;
+      transform: translateX(-50%);
     }
 
     .experience-card::after {
       content: '';
       position: absolute;
-      left: -33px;
-      top: 44px;
-      width: 12px;
-      height: 12px;
+      left: -32px;
+      top: 52px;
+      /* Adjusted to perfectly center on job title */
+      width: 16px;
+      height: 16px;
       background: var(--bg);
       border: 3px solid var(--accent);
       border-radius: 50%;
       z-index: 2;
-      box-shadow: 0 0 10px var(--accent-glow);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 20px var(--accent-glow);
     }
 
     .experience-card:last-child::before {
-      bottom: calc(100% - 44px);
+      bottom: calc(100% - 52px);
     }
 
     .experience-card h3 {
@@ -508,9 +517,15 @@
       letter-spacing: 0.05em;
     }
 
+    .experience-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 20px;
+    }
+
     .experience-card li {
       color: var(--text-muted);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       padding-left: 24px;
       position: relative;
       line-height: 1.6;
@@ -527,6 +542,13 @@
       left: 0;
       top: 10px;
       opacity: 0.6;
+    }
+
+    .experience-card ul ul {
+      margin-top: 8px;
+      margin-bottom: 0;
+      list-style: none;
+      padding-left: 0;
     }
 
     /* Contact */
@@ -605,8 +627,8 @@
     }
 
     .close-menu-btn {
-      display: none;
-      /* Hidden on desktop */
+      display: none !important;
+      /* Force hide on desktop */
     }
 
     @media (max-width: 1024px) {
@@ -1034,7 +1056,7 @@
             <li><strong>IQDX</strong> – Cryptocurrency trading application with feature development and performance
               improvements</li>
             <li><strong>ZiCharge</strong> – Enhanced UI/UX and implemented robust functionalities including:
-              <ul style="margin-left: 20px; margin-top: 8px;">
+              <ul>
                 <li>Game Card Buying & Delete Account functionality</li>
                 <li>Device Change Verification & Crypto Buying</li>
                 <li>iOS Face ID & Biometric Authentication</li>
