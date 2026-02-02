@@ -37,6 +37,8 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.6;
       scroll-behavior: smooth;
+      padding-top: 80px;
+      /* Prevent content from being hidden behind fixed header */
     }
 
     .container {
@@ -47,8 +49,10 @@
 
     /* Header */
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
       background: rgba(10, 11, 15, 0.9);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
