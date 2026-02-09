@@ -728,17 +728,42 @@
       border: 1px solid transparent;
       border-radius: var(--radius-md);
       padding: 32px;
-      text-align: center;
+      text-align: left;
       transition: all .3s var(--ease-out);
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       background-image:
         linear-gradient(var(--surface), var(--surface)),
         linear-gradient(135deg, rgba(62, 228, 199, 0.2), rgba(56, 189, 248, 0.12));
       background-origin: border-box;
       background-clip: padding-box, border-box;
+    }
+
+    .contact-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(62, 228, 199, 0.12);
+      border: 1px solid rgba(62, 228, 199, 0.25);
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .contact-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-meta span {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      font-weight: 600;
     }
 
     .contact-item:hover {
@@ -747,21 +772,23 @@
       box-shadow: var(--card-shadow);
     }
 
-    .contact-item h4 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .contact-item a {
-      color: var(--accent);
+    .contact-item a,
+    .contact-item p {
+      color: var(--text);
       text-decoration: none;
       font-weight: 600;
-      font-size: 15px;
+      font-size: 16px;
+      margin: 0;
     }
 
     .contact-item a:hover {
       color: var(--accent-hover);
+    }
+
+    .contact-cta {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
     }
 
     /* Footer */
@@ -1419,17 +1446,60 @@
         </div>
         <div class="contact-grid">
           <div class="contact-item reveal">
-            <h4>Email</h4>
-            <a href="mailto:nsabbir26@gmail.com">nsabbir26@gmail.com</a>
+            <div class="contact-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path>
+                <path d="m22 6-10 7L2 6"></path>
+              </svg>
+            </div>
+            <div class="contact-meta">
+              <span>Email</span>
+              <a href="mailto:nsabbir26@gmail.com">nsabbir26@gmail.com</a>
+            </div>
           </div>
           <div class="contact-item reveal">
-            <h4>Phone</h4>
-            <a href="tel:+8801521234980">+880 152 123 4980</a>
+            <div class="contact-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.86.3 1.7.54 2.5a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.58-1.06a2 2 0 0 1 2.11-.45c.8.24 1.64.42 2.5.54A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="contact-meta">
+              <span>Phone</span>
+              <a href="tel:+8801521234980">+880 152 123 4980</a>
+            </div>
           </div>
           <div class="contact-item reveal">
-            <h4>LinkedIn</h4>
-            <a href="https://linkedin.com/in/sabbirn26" target="_blank" rel="noopener">linkedin.com/in/sabbirn26</a>
+            <div class="contact-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </div>
+            <div class="contact-meta">
+              <span>LinkedIn</span>
+              <a href="https://linkedin.com/in/sabbirn26" target="_blank" rel="noopener">linkedin.com/in/sabbirn26</a>
+            </div>
           </div>
+          <div class="contact-item reveal">
+            <div class="contact-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="contact-meta">
+              <span>Location</span>
+              <p>Dhaka, Bangladesh</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-cta">
+          <a class="btn btn-primary" href="mailto:nsabbir26@gmail.com">Send me an email</a>
         </div>
       </section>
     </div>
