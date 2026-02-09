@@ -128,6 +128,18 @@
       box-shadow: 0 0 24px rgba(56, 189, 248, 0.45);
     }
 
+    [data-theme="light"] .cursor {
+      border-color: #0ea5a4;
+      box-shadow: 0 0 0 2px rgba(14, 165, 164, 0.35), 0 0 18px rgba(14, 165, 164, 0.45);
+      background: rgba(14, 165, 164, 0.08);
+      mix-blend-mode: multiply;
+    }
+
+    [data-theme="light"] .cursor.expand {
+      border-color: #0f766e;
+      box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.35), 0 0 24px rgba(15, 118, 110, 0.45);
+    }
+
     @media (max-width: 768px) {
       .cursor {
         display: none;
