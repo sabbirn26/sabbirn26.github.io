@@ -1,7 +1,7 @@
 export const profile = {
   name: 'Sabbir Nasir',
   monogram: 'SN',
-  role: 'iOS Software Engineer',
+  role: 'Software Engineer',
   eyebrow: 'iOS Software Engineer · Fintech · Dhaka, Bangladesh',
   tagline: 'Crafting exceptional mobile experiences',
   intro:
