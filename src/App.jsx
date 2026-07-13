@@ -248,8 +248,31 @@ function Header({ theme, setTheme }) {
 }
 
 function Hero() {
+  const handlePortraitMove = (event) => {
+    if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const stage = event.currentTarget
+    const box = stage.getBoundingClientRect()
+    const x = Math.min(1, Math.max(0, (event.clientX - box.left) / box.width))
+    const y = Math.min(1, Math.max(0, (event.clientY - box.top) / box.height))
+
+    stage.style.setProperty('--portrait-rotate-x', `${(0.5 - y) * 9}deg`)
+    stage.style.setProperty('--portrait-rotate-y', `${(x - 0.5) * 9}deg`)
+  }
+
+  const resetPortraitTilt = (event) => {
+    const stage = event.currentTarget
+    stage.style.setProperty('--portrait-rotate-x', '0deg')
+    stage.style.setProperty('--portrait-rotate-y', '0deg')
+  }
+
   return (
     <section className="hero shell" id="top">
+      <div className="hero-ambient" aria-hidden="true">
+        <span className="ambient-signal signal-one" />
+        <span className="ambient-signal signal-two" />
+        <span className="ambient-signal signal-three" />
+      </div>
       <div className="hero-copy">
         <p className="eyebrow hero-enter delay-1">
           <span className="availability-dot" /> {profile.eyebrow}
@@ -290,14 +313,21 @@ function Hero() {
         </div>
       </div>
 
-      <div className="portrait-stage hero-enter delay-3" aria-label="Portrait of Sabbir Nasir">
-        <div className="portrait-index">01 / iOS ENGINEERING</div>
-        <div className="portrait-backdrop" />
-        <img src={profile.image} alt="Sabbir Nasir" />
-        <div className="portrait-caption">
-          <span>Currently</span>
-          <strong>{profile.role}</strong>
-          <small>Newroz Technologies Limited</small>
+      <div
+        className="portrait-stage hero-enter delay-3"
+        aria-label="Portrait of Sabbir Nasir"
+        onPointerMove={handlePortraitMove}
+        onPointerLeave={resetPortraitTilt}
+      >
+        <div className="portrait-tilt">
+          <div className="portrait-index">01 / iOS ENGINEERING</div>
+          <div className="portrait-backdrop" />
+          <img src={profile.image} alt="Sabbir Nasir" />
+          <div className="portrait-caption">
+            <span>Currently</span>
+            <strong>{profile.role}</strong>
+            <small>Newroz Technologies Limited</small>
+          </div>
         </div>
       </div>
     </section>
