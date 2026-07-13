@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   BriefcaseBusiness,
   Check,
@@ -12,6 +12,7 @@ import {
   Menu,
   Moon,
   Quote,
+  Smartphone,
   Sparkles,
   Sun,
   X,
@@ -248,6 +249,76 @@ function Header({ theme, setTheme }) {
 }
 
 function Hero() {
+  const portraitRef = useRef(null)
+  const [motionState, setMotionState] = useState('hidden')
+
+  useEffect(() => {
+    const supportsOrientation = 'DeviceOrientationEvent' in window
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const usesCoarsePointer = window.matchMedia('(pointer: coarse)').matches
+
+    if (!supportsOrientation || prefersReducedMotion || !usesCoarsePointer) return
+
+    setMotionState(typeof window.DeviceOrientationEvent.requestPermission === 'function' ? 'prompt' : 'active')
+  }, [])
+
+  useEffect(() => {
+    if (motionState !== 'active') return undefined
+
+    const stage = portraitRef.current
+    if (!stage) return undefined
+
+    let frameId = 0
+    let baseline = null
+    let currentX = 0
+    let currentY = 0
+
+    const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value))
+
+    const handleOrientation = (event) => {
+      if (event.beta == null || event.gamma == null) return
+
+      if (!baseline) {
+        baseline = { beta: event.beta, gamma: event.gamma }
+        return
+      }
+
+      const angle = window.screen.orientation?.angle ?? window.orientation ?? 0
+      const betaDelta = event.beta - baseline.beta
+      const gammaDelta = event.gamma - baseline.gamma
+      const landscape = Math.abs(angle) === 90
+      const targetX = clamp((landscape ? gammaDelta : -betaDelta) * 0.2, -7, 7)
+      const targetY = clamp((landscape ? betaDelta : gammaDelta) * 0.2, -7, 7)
+
+      currentX += (targetX - currentX) * 0.24
+      currentY += (targetY - currentY) * 0.24
+
+      cancelAnimationFrame(frameId)
+      frameId = requestAnimationFrame(() => {
+        stage.style.setProperty('--portrait-rotate-x', `${currentX.toFixed(2)}deg`)
+        stage.style.setProperty('--portrait-rotate-y', `${currentY.toFixed(2)}deg`)
+      })
+    }
+
+    window.addEventListener('deviceorientation', handleOrientation, true)
+
+    return () => {
+      window.removeEventListener('deviceorientation', handleOrientation, true)
+      cancelAnimationFrame(frameId)
+      stage.style.setProperty('--portrait-rotate-x', '0deg')
+      stage.style.setProperty('--portrait-rotate-y', '0deg')
+    }
+  }, [motionState])
+
+  const enableDeviceMotion = async () => {
+    try {
+      const permission = await window.DeviceOrientationEvent.requestPermission()
+      setMotionState(permission === 'granted' ? 'active' : 'hidden')
+    } catch {
+      setMotionState('hidden')
+    }
+  }
+
   const handlePortraitMove = (event) => {
     if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
@@ -314,7 +385,8 @@ function Hero() {
       </div>
 
       <div
-        className="portrait-stage hero-enter delay-3"
+        ref={portraitRef}
+        className={`portrait-stage hero-enter delay-3${motionState === 'active' ? ' is-motion-active' : ''}`}
         aria-label="Portrait of Sabbir Nasir"
         onPointerMove={handlePortraitMove}
         onPointerLeave={resetPortraitTilt}
@@ -329,6 +401,11 @@ function Hero() {
             <small>Newroz Technologies Limited</small>
           </div>
         </div>
+        {motionState === 'prompt' && (
+          <button className="motion-permission" type="button" onClick={enableDeviceMotion}>
+            <Smartphone size={15} aria-hidden="true" /> Enable motion
+          </button>
+        )}
       </div>
     </section>
   )

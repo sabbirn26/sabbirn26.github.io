@@ -572,6 +572,30 @@ img {
   will-change: transform;
 }
 
+.portrait-stage.is-motion-active .portrait-tilt {
+  transform: rotateX(var(--portrait-rotate-x)) rotateY(var(--portrait-rotate-y));
+  transition: transform 110ms linear;
+}
+
+.motion-permission {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 5;
+  min-height: 36px;
+  padding: 8px 11px;
+  display: none;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 65%, var(--text));
+  border-radius: 5px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .portrait-stage:hover .portrait-tilt {
     transform: rotateX(var(--portrait-rotate-x)) rotateY(var(--portrait-rotate-y));
@@ -1756,6 +1780,7 @@ footer {
   .portrait-tilt {
     border-radius: 22px;
   }
+  .motion-permission { display: inline-flex; }
   .portrait-backdrop { display: none; }
   .portrait-stage img {
     inset: 0;
